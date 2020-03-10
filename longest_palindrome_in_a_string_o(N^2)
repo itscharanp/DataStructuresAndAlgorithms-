@@ -1,0 +1,54 @@
+package practice;
+import java.util.*;
+class Practice {
+  
+    
+   public static int lenlongsub(String temp)
+   {
+       char s[] = temp.toCharArray();
+       int len = temp.length();
+              int max = 0;
+       int curr_n = 0;
+       for(int i=0;i<len;i++)
+       {
+           int l = i,r = i;
+           while(l>=0 && r<len && s[l] == s[r])
+           {
+               curr_n = r-l + 1;
+               if(curr_n > max)
+               {
+                   max = curr_n;
+               }
+               l--;
+               r++;
+           }
+           
+           
+           l = i;
+           r = i+1;
+           while(l>=0 && r<len && s[l] == s[r])
+           {
+               curr_n = r-l + 1;
+               if(curr_n > max)
+               {
+                   max = curr_n;
+               }
+               l--;
+               r++;
+           }
+           
+           
+       } 
+       return max;
+           
+      
+   }
+   public static void main(String args[])
+   {
+        Scanner in = new Scanner(System.in);
+        String s = in.next();
+        System.out.print(lenlongsub(s)); 
+   }
+}
+
+
