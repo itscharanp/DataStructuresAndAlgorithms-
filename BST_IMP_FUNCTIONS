@@ -1,0 +1,30 @@
+public ArrayList<Integer> findpath(Node nd,int key)
+   {
+       if(nd == null)
+           return null;
+       if(nd.data == key)
+       {
+            ArrayList<Integer> output = new ArrayList<>();
+            output.add(key);
+            return output;
+       }
+       else if(nd.data > key)
+       {
+           ArrayList<Integer> LeftOutput = findpath(nd.left,key);
+           if(LeftOutput != null)
+           {
+               LeftOutput.add(nd.data);
+           }
+           
+           return LeftOutput;
+       }
+       else
+       {
+           ArrayList<Integer> rightOutput = findpath(nd.right,key);
+           if(rightOutput != null){
+           rightOutput.add(nd.data);
+           }
+           return rightOutput;
+       }
+       
+   }
