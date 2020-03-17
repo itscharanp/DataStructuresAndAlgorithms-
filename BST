@@ -1,1 +1,147 @@
+package practice;
+import java.util.*;
+class Node
+{
+    Node left,right;
+    int data;
+    Node(int data)
+    {
+        this.data = data;
+    }
+}
+class BST
+{
+    Node nd = null;
+    BST(int data)
+    {
+        nd = new Node(data);
+        
+    }
+    public Node insertNode(Node node,int data)
+    {
+        if(node == null)
+        {
+            node = new Node(data);
+            return node;
+        }
+        if(data < node.data)
+        {
+            node.left = insertNode(node.left,data);
+        }
+        else if(node.data < data)
+        {
+            node.right = insertNode(node.right,data);
+        }
+        return node;
+    }  
+    
+    public Node Search_inorderTraversal(Node nd,int data)
+    {
+        
+        if(nd == null)
+            return null;
+        if(nd.data == data)
+            return nd;
+        
+        if(nd.data < data)
+            return inorderTraversal(nd.right,data);
+        else if(nd.data > data)
+            return inorderTraversal(nd.left,data);
+            
+        return null;
+        
+    }
+    public void printinrange(Node node,int data1,int data2)
+    {
+        if(node != null)
+        {
+        printinrange(node.left,data1,data2);
+        if(node.data >= data1 && node.data <= data2)
+        System.out.println(node.data+" ");
+        printinrange(node.right, data1,data2);
+        }   
+    }
+    
+    
+   public boolean checkBST(Node nd,int min,int max)
+   {    
+       if(nd == null)
+           return true;
+       
+       if(nd.data > min && nd.data < max)
+       {
+          boolean op1 =  checkBST(nd.left,min,nd.data-1);
+          boolean op2 = checkBST(nd.right,nd.data,max);
+          return op1 && op2;
+       }
+       return false;   
+   }
+   public boolean checkBST(Node nd)
+   {
+      return checkBST(nd,Integer.MIN_VALUE,Integer.MAX_VALUE);   
+   }
+   
+   
+    public static Node BSTfromsortedArr(int[] arr,int start,int end)
+   {
+      
+       if(start > end)
+       {
+          return null;
+       }
+           
+           int mid = (start+end)/2;
+           Node node = new Node(arr[mid]);
+           node.left =  BSTfromsortedArr(arr,start,mid-1);
+           node.right = BSTfromsortedArr(arr,mid+1,end);
+           
+      return node;
+   }
+    
+    public static void PreorderTraversal(Node nd)
+    {
+        
+               if(nd != null){
+                System.out.print(nd.data+" "); 
+                inorderTraversal(nd.left);   
+                inorderTraversal(nd.right);
+    }
+
+}   
+}
+class Practice {  
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int arr[] = new int[n];
+        for(int i=0;i<arr.length;i++)
+        {
+            arr[i] = in.nextInt();
+        }
+        BST bst = new BST(arr[0]);
+        for(int i=1;i<n;i++)
+          bst.insertNode(bst.nd,arr[i]);
+        
+        
+        //InorderTraversal and Searching node
+        //bst.nd = bst.inorderTraversal(bst.nd,4);
+        //if(bst.nd != null)
+        //System.out.println("Im the node you searched :) "+bst.nd.data);
+        
+        //Print The elements in range
+         System.out.println(" me after getting range :) ");
+         bst.printinrange(bst.nd, 1, 5);
+         
+         
+         
+        //BST FROM SORTED ARRAY 
+        Node nd = BST.BSTfromsortedArr(arr,0,arr.length-1);
+        BST.inorderTraversal(nd);
+         
+        
+    }
+}
+
+
 
