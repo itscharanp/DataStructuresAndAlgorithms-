@@ -72,3 +72,21 @@ public ArrayList<Integer> findpath(Node nd,int key)
       return root.left.data;
     }
     
+    // LONGEST COMMON ANCESTOR
+    
+    public int lca(Node node, int n1, int n2)
+    {
+        if(node == null)
+            return -1;
+        if(node.data > n1 && node.data > n2)
+            return lca(node,n1,n2);
+        else if(node.data > n1 && node.data > n2)
+            return lca(node,n1,n2);
+        
+        return node.data;
+       
+        
+        
+    }
+   
+    
