@@ -13,7 +13,7 @@ class Node
 class BT
 {
     Node node;
-    public Node VerticalinsertNode(Node node,int arr[],int i)
+    public Node LevelinsertNode(Node node,int arr[],int i)
      {
          
          if(i < arr.length)
