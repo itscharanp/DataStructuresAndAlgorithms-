@@ -28,3 +28,47 @@ public ArrayList<Integer> findpath(Node nd,int key)
        }
        
    }
+
+   public Node deleteNode(int key,Node nd)
+    {
+        if(nd == null)
+            return nd;
+        
+        if(key < nd.data)
+        {
+           nd.left =  deleteNode(key,nd.left);
+        }
+        
+        else if(key > nd.data)
+        {
+           nd.right =   deleteNode(key,nd.right);
+        }
+        
+        else
+        {
+            if(nd.right == null)
+            {
+                return nd.left;
+                
+            }
+            else if(nd.left == null)
+            {
+                return nd.right;
+                
+            }
+            
+            nd.data = minInorder(nd.right);
+            nd.right = deleteNode(nd.data,nd.right);
+            
+            
+        }
+      return  nd;
+    }
+    int minInorder(Node root)
+    {
+        while(root.left != null)
+          minInorder(root.left); 
+        
+      return root.left.data;
+    }
+    
