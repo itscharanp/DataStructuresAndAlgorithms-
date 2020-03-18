@@ -1,0 +1,111 @@
+package practice;
+import java.util.*;
+class Node
+{
+    int data;
+    Node left,right;
+    Node(int data)
+    {
+        this.data = data;
+        left = right = null;
+    }   
+}
+class BT
+{
+    Node node;
+    public Node VerticalinsertNode(Node node,int arr[],int i)
+     {
+         
+         if(i < arr.length)
+         {
+             Node temp = new Node(arr[i]);
+             node =  temp;
+             node.left = VerticalinsertNode(node.left,arr,2*i+1);
+             node.right = VerticalinsertNode(node.right,arr,2*i+2);         
+         }
+         return node;
+     }
+      public void inorder(Node nd)
+      {
+          if(nd != null)
+          {
+                inorder(nd.left);
+                System.out.print(nd.data+" ");
+                inorder(nd.right);
+          }
+      }
+      
+      int max = 0;
+      public void leftview(Node node,int height)
+      {
+          if(node == null)
+              return;
+          
+          if(max < height)
+          {
+             System.out.print(node.data + " ");
+             max = height;
+          }
+          leftview(node.left,height+1);
+          leftview(node.right,height+1);
+      }
+      
+
+      public void leftview(Node node)
+      {
+          leftview(node,1);
+      }
+      
+       int max1 = 0;
+      public void rightview(Node node,int height)
+      {
+          if(node == null)
+              return;
+          
+          if(max1 < height)
+          {
+             System.out.print(node.data + " ");
+             max1 = height;
+          }
+      
+          rightview(node.right,height+1);
+              rightview(node.left,height+1);
+      }
+      
+
+      public void rightview(Node node)
+      {
+          rightview(node,1);
+      }   
+      
+      
+      
+      
+      
+      
+      
+}
+class Practice {  
+    public static void main(String args[])
+    {
+        Scanner in = new Scanner(System.in);
+        int n = in.nextInt();
+        int arr[] = new int[n];
+        for(int i=0;i<n;i++)
+        {
+            arr[i] = in.nextInt();
+        }
+        BT bt = new BT();
+        Node node = null;
+        node = bt.VerticalinsertNode(node,arr,0);
+        //bt.inorder(node);
+        bt.leftview(node);
+        System.out.println();
+        bt.rightview(node);
+        
+        
+         
+    }
+}
+
+
